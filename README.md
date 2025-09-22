@@ -1,108 +1,79 @@
-# 📌 Retail Inventory Management System
-
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)  
-[![Supabase](https://img.shields.io/badge/Backend-Supabase-green)](https://supabase.com/)  
-[![Postgres](https://img.shields.io/badge/Database-PostgreSQL-blue)](https://www.postgresql.org/)  
-
----
+# 🛍️ Retail Management System CLI
 
 ## 📌 Problem Statement
 
-This project demonstrates how to build a **real-world Retail Inventory Management System** using Python and Supabase/Postgres.  
-It simulates actual retail operations like managing products, customers, orders, payments, and generating reports.
+This project demonstrates how to build a **real-world Retail Inventory Management System** using Python and Supabase/Postgres. It simulates actual retail operations like managing products, customers, orders, payments, and generating critical business reports through a clean, command-driven interface.
 
 ---
 
 ## 🚀 Features
 
 ### 👕 Product Management
-- Add new products with SKU, price, stock, and category
-- Update, list, and view products
-- Check low-stock products and restock
+-   **Add new products** with SKU, price, stock levels, and category.
+-   **Update, list, and view** product details.
+-   **Check for low-stock products** below a specified threshold.
+-   **Restock** products to update inventory counts.
 
 ### 👥 Customer Management
-- Add, update, delete, and list customers
-- Search customers by email or city
+-   **Add, update, delete, and list** customer profiles.
+-   **Search for customers** by their email or city for quick lookups.
 
 ### 🛒 Order Management
-- Create orders with multiple items
-- Show order details
-- Cancel orders (restores stock and refunds payment)
-- Complete orders (marks as completed and processes payment)
+-   **Create orders** with multiple products and quantities in a single command.
+-   **Show detailed order information**, including customer data and line items.
+-   **Cancel orders**, which automatically restocks the items and processes a refund if payment was made.
 
 ### 💳 Payment Management
-- Process payments via Cash, Card, or UPI
-- Refund payments for cancelled orders
-- Handles datetime serialization for JSON output
+-   **Process payments** for orders via multiple methods: `Cash`, `Card`, or `UPI`.
+-   **Refund payments** automatically when an associated order is cancelled.
+-   Handles `datetime` serialization for clean JSON output.
 
 ### 📊 Reporting
-- Top-selling products
-- Total revenue last month
-- Orders per customer
-- Frequent customers based on order count
+-   **Top-selling products**: Identify which products are most popular.
+-   **Total revenue last month**: Get a snapshot of financial performance.
+-   **Orders per customer**: Analyze customer purchasing habits.
+-   **Frequent customers**: Identify and reward loyal customers based on their order count.
 
-### 🗄 Supabase/Postgres Database
-- Persistent relational data storage for products, customers, orders, payments
+### 🗄️ Supabase/Postgres Database
+-   Utilizes a **persistent relational database** for storing all product, customer, order, and payment data.
+-   Ensures data integrity with foreign key constraints and relationships.
 
-### 🖥 Command-Line Interface (CLI)
-- Fully menu-driven CLI for easy interaction
+### 🖥️ Command-Line Interface (CLI)
+-   A **fully interactive CLI** built with Python's `argparse`.
+-   Provides clear commands, arguments, and help messages for easy interaction without a graphical user interface.
 
 ---
 
-## 🛠 How to Run
+## 🛠️ Technology Stack
 
-```yaml
-clone_repo: 
-  git clone https://github.com/AnveshAnnepaga/Retail-Inventory-Management-System.git
-  cd Retail-Inventory-Management-System
+-   **Backend**: Python 3.8+
+-   **Database**: Supabase (PostgreSQL)
+-   **CLI Framework**: `argparse` (Python Standard Library)
+-   **Dependencies**: `supabase-py`, `python-dotenv`
 
-create_virtual_environment: |
-  python -m venv venv
-  # On macOS/Linux
-  source venv/bin/activate
-  # On Windows
-  venv\Scripts\activate
+---
 
-install_dependencies: 
-  pip install -r requirements.txt
+## 🚀 Getting Started
 
-set_env_variables: 
-  Create a .env file in the project root
-  Add your Supabase credentials as per .env.example
+### 1. Prerequisites
+-   Git, Python 3.8+, and a free [Supabase](https://supabase.com/) account.
 
-run_application: 
-  python -m src.cli.main
+### 2. Installation & Setup
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd retail-system
+    ```
+2.  **Create and activate a virtual environment:**
+    ```bash
+    python -m venv venv && source venv/bin/activate
+    # On Windows: venv\Scripts\activate
+    ```
+3.  **Install dependencies:**
+    ```bash
+    pip install supabase python-dotenv
+    ```
+4.  **Configure your `.env` file** in the project root with your Supabase URL and Key.
+5.  **Run the `schema.sql` script** in the Supabase SQL Editor to set up your database tables.
 
-🖥 CLI Commands:
-
-# Products
-product:
-  add: python -m src.cli.main product add --name "Laptop" --sku "LP100" --price 1200 --stock 10 --category "Electronics"
-  list: python -m src.cli.main product list
-
-# Customers
-customer:
-  add: python -m src.cli.main customer add --name "John Doe" --email "john@example.com" --phone "1234567890" --city "NY"
-  update: python -m src.cli.main customer update --customer 1 --phone "9876543210" --city "LA"
-  delete: python -m src.cli.main customer delete --customer 1
-  list: python -m src.cli.main customer list
-  search: python -m src.cli.main customer search --email "john" --city "NY"
-
-# Orders
-order:
-  create: python -m src.cli.main order create --customer 1 --item 2:3 4:1
-  show: python -m src.cli.main order show --order 3
-  complete: python -m src.cli.main order complete --order 3
-  cancel: python -m src.cli.main order cancel --order 3
-
-# Payments
-payment:
-  process: python -m src.cli.main payment process --order 3 --method UPI
-  refund: python -m src.cli.main payment refund --order 3
-
-# Reporting
-report:
-  top_products: python -m src.cli.main report top_products
-  revenue_last_month: python -m src.cli.main report revenue_last_month
-  orders_per_customer: python -m src.cli.main report orders_per_customer
-  frequent_customers: python -m src.cli.main report frequent_customers --min_orders 5
+---
